@@ -6,8 +6,8 @@ import pickle
 
 st.set_page_config(page_title="Net-Zero Carbon Architect", layout="wide")
 
-st.title("🏢 Integrated Building Performance Optimization Platform")
-st.markdown("This system chains geometric layouts with structural material thermal scaling to predict final energy outcomes.")
+st.title("Building performance optimisation platform")
+# st.markdown("This system chains geometric layouts with structural material thermal scaling to predict final energy outcomes.")
 
 # 1. Load Meta Data for Dropdown Selectors
 @st.cache_data
@@ -47,20 +47,20 @@ def load_all_assets():
 try:
     enc_l, enc_m, ml_layout, ml_mat = load_all_assets()
 except FileNotFoundError:
-    st.error("⚠️ Missing model components! Please run `train_models.py` first.")
+    st.error(" run `train_models.py`")
     st.stop()
 
 # 3. Sidebar UI: Two Distinct Sections In One Streamlined View
-st.sidebar.header("📐 Step 1: Geometric Configuration")
+st.sidebar.header("Geometric Configuration")
 wwr = st.sidebar.slider("Window to Wall Ratio (%)", 10, 50, 30, 5)
 orient = st.sidebar.slider("Site Orientation (°)", 0, 270, 180, 90)
 w_open = st.sidebar.slider("% External Window Opens", 50, 80, 60, 10)
 facade = st.sidebar.selectbox("Facade Layout Matrix", options=facades)
 shading = st.sidebar.selectbox("Local Shading Framework", options=shadings)
 
-st.sidebar.markdown("---")
-st.sidebar.header("🧱 Step 2: Structural Materials")
-st.sidebar.info("💡 Default settings are preset to the most optimal energy-saving material combination found in your optimization run.")
+st.sidebar.markdown("--")
+st.sidebar.header("Structural Materials")
+st.sidebar.info("optimised materials selected")
 
 # Automatically default dropdown selections to the best performing options
 def_wall_idx = ext_walls.index('AAC + INSULATION')
@@ -106,25 +106,25 @@ final_cooling = geo_base_cooling * mult_cooling
 final_discom = geo_base_discom * mult_discom
 
 # 5. USER INTERFACE METRICS PRESENTATION
-st.subheader("🎯 Cumulative System Performance Metrics")
+st.subheader("Cumulative System Performance Metrics")
 m1, m2, m3 = st.columns(3)
 
 with m1:
     st.metric(
-        label="🔌 Cumulative Site Energy", 
+        label=" Cumulative Site Energy", 
         value=f"{final_total:,.2f} kWh", 
         delta=f"{(mult_total-1)*100:+.1f}% Material Effect"
     )
 with m2:
     st.metric(
-        label="❄️ Cumulative Cooling Demand", 
+        label=" Cumulative Cooling Demand", 
         value=f"{final_cooling:,.2f} kWh", 
         delta=f"{(mult_cooling-1)*100:+.1f}% Material Effect",
         delta_color="inverse"
     )
 with m3:
     st.metric(
-        label="🌡️ Thermal Discomfort", 
+        label=" Thermal Discomfort", 
         value=f"{final_discom:,.1f} Hours", 
         delta=f"{(mult_discom-1)*100:+.1f}% Material Effect",
         delta_color="inverse"
@@ -132,17 +132,17 @@ with m3:
 
 # 6. EXPLANATION CONTAINER FOR TEAM MEETINGS
 st.markdown("---")
-with st.expander("🔍 See Systems Engineering Workflow (How this calculation stacks)"):
+with st.expander("How this calculation stacks"):
     col_a, col_b = st.columns(2)
     with col_a:
         st.markdown(f"""
-        **Stage 1: Geometric Baseline Performance**
+        ** Geometric Baseline Performance**
         * Your choices for Orientation, WWR, and Shading established a spatial baseline.
         * **Baseline Energy Assessment:** `{geo_base_total:,.2f} kWh`
         """)
     with col_b:
         st.markdown(f"""
-        **Stage 2: Material Thermal Envelope Correction**
+        ** Material Thermal Envelope Correction**
         * The selected structural materials change structural efficiency by a multiplier of **{mult_total:.2f}x** compared to standard brick.
         * **Optimized Thermal Outcome:** `{final_total:,.2f} kWh`
         """)
