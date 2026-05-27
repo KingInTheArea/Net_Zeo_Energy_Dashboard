@@ -113,21 +113,19 @@ with m1:
     st.metric(
         label=" Cumulative Site Energy", 
         value=f"{final_total:,.2f} kWh", 
-        delta=f"{(mult_total-1)*100:+.1f}% Material Effect"
+        
     )
 with m2:
     st.metric(
         label=" Cumulative Cooling Demand", 
         value=f"{final_cooling:,.2f} kWh", 
-        delta=f"{(mult_cooling-1)*100:+.1f}% Material Effect",
-        delta_color="inverse"
+       
     )
 with m3:
     st.metric(
         label=" Thermal Discomfort", 
         value=f"{final_discom:,.1f} Hours", 
-        delta=f"{(mult_discom-1)*100:+.1f}% Material Effect",
-        delta_color="inverse"
+       
     )
 
 # 6. EXPLANATION CONTAINER FOR TEAM MEETINGS
