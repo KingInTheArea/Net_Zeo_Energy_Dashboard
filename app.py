@@ -222,7 +222,7 @@ st.warning(
 # 7. INTERACTIVE DESIGN CHART: WWR vs. ORIENTATION
 # =======================================================
 st.markdown("---")
-st.subheader("📊 Geometric Sensitivity Mapping")
+st.subheader(" Geometric Sensitivity Mapping")
 st.markdown("This interactive matrix visualizes how **Window-to-Wall Ratio** and **Orientation** cross-examine to change total energy outcomes under your selected facade and shading framework.")
 
 import plotly.graph_objects as go
